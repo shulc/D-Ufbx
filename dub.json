@@ -1,0 +1,32 @@
+{
+    "name": "d-ufbx",
+    "description": "D bindings for ufbx — a robust FBX/OBJ/MTL scene loader. Curated static-link subset; more of the API can be added incrementally.",
+    "license": "MIT",
+    "authors": ["Alexander Shagarov"],
+
+    "sourcePaths": ["source"],
+    "importPaths": ["source"],
+
+    "preBuildCommands-posix": [
+        "cd \"$PACKAGE_DIR\" && git submodule update --init --recursive --quiet",
+        "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\" -DCMAKE_BUILD_TYPE=Release",
+        "cmake --build \"$PACKAGE_DIR/build\" -j --target ufbx"
+    ],
+
+    "lflags-posix": ["-L$PACKAGE_DIR/build"],
+
+    "libs-posix": ["ufbx", "m"],
+
+    "configurations": [
+        {
+            "name": "library",
+            "targetType": "staticLibrary"
+        },
+        {
+            "name": "load_fbx",
+            "targetType": "executable",
+            "targetName": "load_fbx",
+            "mainSourceFile": "examples/load_fbx.d"
+        }
+    ]
+}

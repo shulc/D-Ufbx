@@ -1,0 +1,13 @@
+build/
+.dub/
+*.o
+*.a
+*.so
+*.dylib
+docs/
+docs.json
+__dummy.html
+d-ufbx
+*-test-library
+*-test-unittest
+/load_fbx
