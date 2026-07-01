@@ -21,6 +21,7 @@
         "cmake --build \"$PACKAGE_DIR/build\" --config Release --target ufbx"
     ],
     "lflags-windows": ["$PACKAGE_DIR/build/Release/ufbx.lib"],
+    "dflags-windows": ["-mscrtlib=msvcrt"],
 
     "configurations": [
         {
