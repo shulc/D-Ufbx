@@ -12,10 +12,15 @@
         "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\" -DCMAKE_BUILD_TYPE=Release",
         "cmake --build \"$PACKAGE_DIR/build\" -j --target ufbx"
     ],
-
     "lflags-posix": ["-L$PACKAGE_DIR/build"],
-
     "libs-posix": ["ufbx", "m"],
+
+    "preBuildCommands-windows": [
+        "git -C \"$PACKAGE_DIR\" submodule update --init --recursive",
+        "cmake -S \"$PACKAGE_DIR\" -B \"$PACKAGE_DIR/build\"",
+        "cmake --build \"$PACKAGE_DIR/build\" --config Release --target ufbx"
+    ],
+    "lflags-windows": ["$PACKAGE_DIR/build/Release/ufbx.lib"],
 
     "configurations": [
         {

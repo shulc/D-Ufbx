@@ -13,9 +13,12 @@ add_library(ufbx STATIC extern/ufbx/ufbx.c)
 
 target_include_directories(ufbx PUBLIC extern/ufbx)
 
-target_compile_options(ufbx PRIVATE
-    -Wall
-    -Wno-unused-function
-    # ufbx uses long long / bool / flexible arrays that may trigger pedantic warnings
-    -Wno-pedantic
-)
+# GCC/Clang warning flags only — MSVC (cl) doesn't understand -W* and would choke.
+if(NOT MSVC)
+    target_compile_options(ufbx PRIVATE
+        -Wall
+        -Wno-unused-function
+        # ufbx uses long long / bool / flexible arrays that may trigger pedantic warnings
+        -Wno-pedantic
+    )
+endif()
